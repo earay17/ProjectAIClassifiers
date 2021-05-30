@@ -21,6 +21,6 @@ def generate_model(model, matrix):
 
 matrix = np.genfromtxt('generated/matrix.csv', delimiter=' ', comments='#')
 np_matrix = np.array(matrix)
-models = [NaiveBayesModel, RandomForestModel]
+models = [NaiveBayesModel, RandomForestModel, SVMRBFModel, SVMSigmoidModel, SVMPolyModel]
 for model in models:
     generate_model(model, np_matrix)

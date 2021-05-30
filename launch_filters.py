@@ -26,11 +26,11 @@ def read_mail(location: str):
     print("Loaded email from ", location)
     return envelope
 
-filters = [NaiveBayesFilter, RandomForestFilter]
+filters = [NaiveBayesFilter, RandomForestFilter, SVMRBFFilter, SVMSigmoidFilter, SVMPolyFilter]
 email_to_predict = read_mail("./datasets/test")
 
 for filter in filters:
-    filename = './generated/cross_validation_models/' + filter.__name__ + '.json'
+    filename = './generated/' + filter.__name__ + '.json'
     with open(filename, "r") as file:
         data = json.load(file)
     filter_object = filter()

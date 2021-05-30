@@ -21,7 +21,7 @@ class ModelGenerator:
         """
         self._matrix = matrix
 
-    def training(self):
+    def old_training(self):
         """
         This method trains the machine learning algorithm.
         It splits the matrix in two parts: one for train and one for test
@@ -36,41 +36,7 @@ class ModelGenerator:
         print("Training...")
         self.clf.fit(X_train, y_train)
 
-        def training_cross_validation(self):
-            """
-               This method trains the machine learning algorithm.
-               It splits the matrix in two parts: one for train and one for test
-               """
-            targets = self._matrix[:, 0]
-            new_matrix = self._matrix
-            new_matrix = np.delete(new_matrix, 0, axis=1)
-            X_train, X_test, y_train, y_test = train_test_split(new_matrix, targets
-                                                                , test_size=0.20, shuffle=True)
-
-            kf = StratifiedKFold(n_splits=5)
-
-            print("Preparing the model...")
-            self.clf = self.create_model()
-
-            print("Training...")
-            self.clf.fit(X_train, y_train)
-
-            score = self.clf.score(X_train, y_train)
-            print("Metrica del modelo", score)
-
-            scores = cross_val_score(self.clf, X_train, y_train, cv=kf, scoring="accuracy")
-
-            print("Metricas cross_validation", scores)
-
-            print("Media de cross_validation", scores.mean())
-
-            preds = self.clf.predict(X_test)
-
-            score_pred = metrics.accuracy_score(y_test, preds)
-
-            print("Metrica en Test", score_pred)
-
-    def training_cross_validation(self):
+    def training(self):
         """
            This method trains the machine learning algorithm.
            It splits the matrix in two parts: one for train and one for test
@@ -127,14 +93,14 @@ class ModelGenerator:
         with open("generated/" + name + 'Filter.json', 'w') as file:
             json.dump(data, file)
 
-    def saving_model_stratified(self):
+    def saving_model(self):
         """
         This method saves the model in a json file using jsonpickle
         """
         name = self.__class__.__name__[:-5]
         data = jsonpickle.encode(self.clf)
 
-        with open("generated/cross_validation_models/" + name + 'Filter.json', 'w') as file:
+        with open("generated/" + name + 'Filter.json', 'w') as file:
             json.dump(data, file)
 
     def create_model(self):
