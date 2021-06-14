@@ -250,8 +250,10 @@ class EmailEnvelope:
 
     def ai_check_email_client_id(self):
         """
-        This method calculates the hash of the sender domain
-        :return: hash of the sender domain
+        This method calculates the hash of the sender domain. In order to obtain a positive hash, the python hash
+        is adjusted by doing the next operation: hash % ((sys.maxsize + 1) * 2)
+        Then, the hash is shortened by dividing it by the prime number 1111118111111
+        :return: hash of the sender domain.
         """
         email_client = self.get_sender_domain()
         if email_client is not None:

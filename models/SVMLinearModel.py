@@ -8,4 +8,4 @@ class SVMLinearModel(ModelGenerator):
         This method returns the respective classifier
         :return: SVM linear kernel classifier
         """
-        return svm.SVC(kernel='linear', C=1, random_state=42)
+        return svm.SVC(kernel='linear')

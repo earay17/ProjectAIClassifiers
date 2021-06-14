@@ -10,7 +10,13 @@ from spamfilter.SVMRBFFilter import SVMRBFFilter
 from spamfilter.SVMSigmoidFilter import SVMSigmoidFilter
 
 
-def read_mail(location: str):
+def read_mail_folder(location: str):
+    """
+    This function read all the emails from a path and parse each of them to EmailMessage
+    :param location: path
+    :return: Sequence[EmailMessage]
+    """
+    emails = list()
     for path, dirs, files in walk(location):
         for file in files:
             try:
@@ -20,19 +26,25 @@ def read_mail(location: str):
                     peer=None, mail_from=None, rcpt_tos=None,
                     email_msg=email_msg
                 )
+                emails.append(envelope)
             except Exception as e:
                 print("Error ", e)
                 print("File: ", file)
-    print("Loaded email from ", location)
-    return envelope
+    print("Loaded emails from ", location, ":", len(emails))
+    return emails
+
 
 filters = [NaiveBayesFilter, RandomForestFilter, SVMRBFFilter, SVMSigmoidFilter, SVMPolyFilter]
-email_to_predict = read_mail("./datasets/test")
+emails_to_predict = read_mail("./datasets/test")
 
 for filter in filters:
+    # Read filter data
     filename = './generated/' + filter.__name__ + '.json'
     with open(filename, "r") as file:
         data = json.load(file)
+    # Create filter
     filter_object = filter()
     filter_object.set_initial_data(data)
-    print(filter.__name__, ' : ', filter_object.filter(email_to_predict))
+    # Do predictions
+    for email in emails_to_predict:
+        print(filter.__name__, ' : ', filter_object.filter(email_to_predict))

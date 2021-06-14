@@ -1,7 +1,5 @@
 import sys
 from unittest import TestCase
-from os.path import join
-from os import walk
 import email
 
 from spamfilter.EmailEnvelope import EmailEnvelope

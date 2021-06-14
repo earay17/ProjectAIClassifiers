@@ -5,6 +5,7 @@ from os.path import join
 from MatrixGenerator import MatrixGenerator
 from spamfilter.EmailEnvelope import EmailEnvelope
 
+
 def read_mail_folder(location: str):
     """
     This function read all the emails from a path and parse each of them to EmailMessage
@@ -29,7 +30,7 @@ def read_mail_folder(location: str):
     return emails
 
 
-# FIRST STEP: READ AND CREATE MATRIX
+# READ AND CREATE MATRIX
 start_time = time.time()
 print('New generate matrix')
 print(f"Reading emails...")
