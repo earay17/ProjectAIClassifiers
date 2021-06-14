@@ -16,11 +16,11 @@ def generate_model(model, matrix):
     clf_model.training()
     clf_model.saving_model()
     total_time = time.time() - start_time
-    print("Tiempo total: ", total_time, "\n")
+    print("Total time: ", total_time, "\n")
 
 
 matrix = np.genfromtxt('generated/matrix.csv', delimiter=' ', comments='#')
 np_matrix = np.array(matrix)
-models = [NaiveBayesModel, RandomForestModel, SVMRBFModel, SVMSigmoidModel, SVMPolyModel]
+models = [NaiveBayesModel]
 for model in models:
     generate_model(model, np_matrix)

@@ -4,8 +4,7 @@ import json
 import jsonpickle
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
-
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score, GridSearchCV
 
 def predictions(args):
     pass
