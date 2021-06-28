@@ -35,7 +35,7 @@ def read_mail_folder(location: str):
 
 
 filters = [NaiveBayesFilter, RandomForestFilter, SVMRBFFilter, SVMSigmoidFilter, SVMPolyFilter]
-emails_to_predict = read_mail("./datasets/test")
+emails_to_predict = read_mail_folder("./datasets/test")
 
 for filter in filters:
     # Read filter data
@@ -47,4 +47,4 @@ for filter in filters:
     filter_object.set_initial_data(data)
     # Do predictions
     for email in emails_to_predict:
-        print(filter.__name__, ' : ', filter_object.filter(email_to_predict))
+        print(filter.__name__, ' : ', filter_object.filter(email))
