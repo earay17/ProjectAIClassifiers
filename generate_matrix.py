@@ -42,4 +42,4 @@ matrix.calculate_matrix()
 print("Storing matrix...")
 matrix.store_matrix('generated/matrix.csv')
 total_time = time.time() - start_time
-print("Tiempo total: ", total_time)
+print("Total time: ", total_time)

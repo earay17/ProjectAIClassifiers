@@ -21,7 +21,7 @@ def generate_model(model, matrix):
     clf_model.training()
     clf_model.saving_model()
     total_time = time.time() - start_time
-    print("Total time: ", total_time, "\n")
+    print("Total time in seconds: ", total_time, "\n")
 
 
 matrix = np.genfromtxt('generated/matrix.csv', delimiter=' ', comments='#')

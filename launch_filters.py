@@ -1,5 +1,6 @@
 import email
 import json
+import time
 from os import walk
 from os.path import join
 from spamfilter import RandomForestFilter
@@ -35,9 +36,11 @@ def read_mail_folder(location: str):
 
 
 filters = [NaiveBayesFilter, RandomForestFilter, SVMRBFFilter, SVMSigmoidFilter, SVMPolyFilter]
-emails_to_predict = read_mail("./datasets/test")
+emails_to_predict = read_mail_folder("./datasets/toPredict")
 
 for filter in filters:
+    results = list()
+    start_time = time.time()
     # Read filter data
     filename = './generated/' + filter.__name__ + '.json'
     with open(filename, "r") as file:
@@ -47,4 +50,7 @@ for filter in filters:
     filter_object.set_initial_data(data)
     # Do predictions
     for email in emails_to_predict:
-        print(filter.__name__, ' : ', filter_object.filter(email_to_predict))
+        #print(filter.__name__, ' : ', filter_object.filter(email))
+        results.append(filter_object.filter(email))
+    total_time = time.time() - start_time
+    print("Total time classifing for ", filter.__name__, ":", total_time, "seconds \n")

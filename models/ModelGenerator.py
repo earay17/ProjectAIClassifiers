@@ -5,6 +5,11 @@ import jsonpickle
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score, GridSearchCV
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import f1_score
 
 
 class ModelGenerator:
@@ -38,13 +43,20 @@ class ModelGenerator:
         score_pred = metrics.accuracy_score(y_test, predictions)
         print("Metrics in Test", score_pred)
 
-        # Total results
-        print(classification_report(y_test, predictions))
-        tn, fp, fn, tp = confusion_matrix(y_test, predictions).ravel()
-        print("True Negatives: ", tn)
-        print("False Positives: ", fp)
-        print("False Negatives: ", fn)
-        print("True Positives: ", tp)
+        # Results TFG
+        #print(classification_report(y_test, predictions))
+        #tn, fp, fn, tp = confusion_matrix(y_test, predictions).ravel()
+        #print("True Negatives: ", tn)
+        #print("False Positives: ", fp)
+        #print("False Negatives: ", fn)
+        #print("True Positives: ", tp)
+
+        #Results for paper
+        print("Confussion matrix: ", confusion_matrix(y_test, predictions))
+        print("Accuracy: ", accuracy_score(y_test, predictions))
+        print("recall: ", recall_score(y_test, predictions))
+        print("precision: ", precision_score(y_test, predictions))
+        print("f-score: ", f1_score(y_test, predictions))
 
     def saving_model(self):
         """
